@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Quicksand:wght@400;600&display=swap');
+
+/* Global Style */
+* {
+  font-family: 'Lora', serif; /* Elegant font for the page */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Title Style */
+h3 {
+  font-size: 2.5rem; /* Larger title */
+  font-weight: bold; /* Bold */
+  text-align: center; /* Centered title */
+  margin-bottom: 20px; /* Space below */
+  text-transform: uppercase; /* Uppercase letters */
+  letter-spacing: 1px; /* Adds space between letters */
+  background: linear-gradient(to right, #F4B183, #E9A17A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Body and Background */
+body {
+  background: url('background.webp') no-repeat center center fixed;
+  background-size: cover; /* Full screen background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Full screen height */
+  background-color: #FFF3E6;
+}
+
+/* Navigation Bar */
+.navbar {
+  background-color: #8B5E48; /* Mocha brown */
+  padding: 10px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: #FFF; /* White links */
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.navbar ul li a:hover, .navbar ul li a.active {
+  color: #E9A17A; /* Warm caramel */
+}
+
+/* Form Container */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #FFF8F2;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+/* Input Fields */
+input, textarea, select {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #D7BFA7;
+  background-color: #FAEDE3;
+  color: #7A4D42;
+  margin-bottom: 12px;
+}
+
+/* Submit Button */
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  background-color: #F4B183; /* Peachy-orange */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #E9A17A; /* Warm caramel */
+}
+
+/* Logo Container */
+.logo-container {
+  width: 250px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('logo.png') no-repeat center center;
+  background-size: cover;
+  border: 10px solid transparent;
+  padding: 30px;
+  border-radius: 50%;
+}
+
+/* Testimonial Section */
+.testimonial-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 45%; /* Each column will take up 45% of the container */
+}
+
+.testimonial-img {
+  width: 100%;  /* Ensures the image fills its container's width */
+  height: auto; /* Maintains aspect ratio */
+  max-width: 200px; /* Limits the width of images to 200px */
+  border-radius: 8px; /* Rounded corners */
+}
+
+#menu img {
+  width: 100%; /* Make sure the images fill their container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Hover Effect */
+#menu h3:hover, #testimonials h3:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Apply Quicksand to body text */
+body, p, li, input, textarea, button {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 17px;
+  color: #7A4D42; /* Softer dark brown for readability */
+}
+
+/* Titles remain in Lora for elegance */
+h1, h2, h3 {
+  font-family: 'Lora', serif;
+}
+
+.payment-info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

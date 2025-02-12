@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "emailjs-com": "^3.2.0"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}

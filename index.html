@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sweet Crumble Order Form</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> <!-- EmailJS SDK -->
+    <script src="script.js" defer></script> <!-- JavaScript file -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#cakeOrderForm">Order Form</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li> <!-- Link to Testimonials Page -->
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <!-- Logo Container -->
+        <div class="logo-container"></div>
+
+        <!-- Status message at the top -->
+        <p id="statusMessage" style="display:none; color: red;"></p> <!-- Initially hidden -->
+
+        <!-- Main Form -->
+        <form id="cakeOrderForm">
+            <!-- Customer Details -->
+            <input type="text" id="name" placeholder="Enter your Name" required />
+            <input type="tel" id="phone" placeholder="Enter your Phone Number" required />
+            <input type="email" id="email" placeholder="Enter your Email" required />
+        
+            <!-- Order Details -->
+            <label for="orderDate">When do you need this order? (At least 1 week in advance)</label>
+            <input type="date" id="orderDate" required />
+        
+            <label for="delivery">Delivery or Pickup:</label>
+            <select id="delivery" required>
+                <option value="">Select...</option>
+                <option value="delivery">Delivery</option>
+                <option value="pickup">Pickup</option>
+            </select>
+        
+            <input type="text" id="address" placeholder="Enter your delivery address" style="display: none" />
+        
+            <textarea id="customOrder" placeholder="Request any dessert from the menu or specify a custom order" rows="4"></textarea>
+        
+            <!-- Special Instructions Field -->
+            <textarea id="instructions" placeholder="Special instructions (e.g., if your order is less than a week away, let us know so we can check availability. )" rows="4"></textarea>
+        
+            <button type="button" id="btn">Submit Order</button>
+        </form>
+        
+        <div class="payment-info">
+            <p>You will be contacted regarding delivery charges if you chose that as your preferred method.</p>
+            <h4>Payment Methods Accepted:</h4>
+            <ul>
+                <li><strong>Apple Pay:</strong> 773-716-4387</li>
+                <li><strong>Zelle:</strong> mu.ibrahim786@gmail.com</li>
+                <li><strong>Cash</strong></li>
+            </ul>
+        </div>
+
+        <!-- Menu Section -->
+        <section id="menu">
+            <h3>Our Menu</h3>
+            <div class="menu-container">
+                <img src="images/menu.PNG" alt="Menu Items" class="menu-items"/>
+                <!-- Add more menu images as needed -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize EmailJS with your user ID
+        emailjs.init("vDTjbx2GcULtYRlUP");
+
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("Script Loaded!");  // Check if script loads correctly
+
+            const submitButton = document.getElementById("btn");
+            const form = document.getElementById("cakeOrderForm");
+            const statusMessage = document.getElementById("statusMessage");
+
+            // Handle address field visibility based on delivery type
+            const deliveryDropdown = document.getElementById("delivery");
+            const addressField = document.getElementById("address");
+
+            // Listen for changes in the delivery dropdown to show/hide the address field
+            deliveryDropdown.addEventListener("change", function () {
+                if (deliveryDropdown.value === "delivery") {
+                    addressField.style.display = "block"; // Show address field for delivery
+                } else {
+                    addressField.style.display = "none"; // Hide address field for pickup
+                }
+            });
+
+            // Trigger the event to handle initial visibility of the address field
+            deliveryDropdown.dispatchEvent(new Event("change"));
+
+            submitButton.addEventListener("click", function () {
+                console.log("Button Clicked!");  // Check if the button click is detected
+
+                const name = document.getElementById("name").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const orderDate = document.getElementById("orderDate").value;
+                const delivery = document.getElementById("delivery").value;
+                const address = document.getElementById("address").value.trim();
+                const customOrder = document.getElementById("customOrder").value.trim();
+                const instructions = document.getElementById("instructions").value.trim();
+
+                // Basic validation to ensure all required fields are filled
+                if (!name || !phone || !orderDate || !delivery) {
+                    alert("Please fill in all required fields.");
+                    return;
+                }
+
+                const orderData = {
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    orderDate: orderDate,
+                    delivery: delivery,
+                    address: address,
+                    customOrder: customOrder,
+                    instructions: instructions,
+                };
+
+                // Show message immediately
+                statusMessage.textContent = "Sending your order...";  // Change message to "sending"
+                statusMessage.style.color = "blue";
+                statusMessage.style.display = "block"; // Make it visible
+                console.log("Submitting order data: ", orderData);  // Log order data to console
+
+                // Send the order data via EmailJS
+                emailjs.send("service_atnr21r", "template_rkbutuh", {
+                    to_email: "officialsweetcrumble@gmail.com",  // Recipient's email address
+                    from_email: email,  // Customer's email address
+                    reply_to: email,  // Reply-To will be the customer's email address
+                    name: name,
+                    phone: phone,
+                    orderDate: orderDate,
+                    delivery: delivery,
+                    address: address,
+                    customOrder: customOrder,
+                    instructions: instructions,
+                })
+                .then((response) => {
+                    console.log("SUCCESS", response);
+                    statusMessage.textContent = "Order submitted successfully! Thank you for ordering.";
+                    statusMessage.style.color = "green";
+                    form.reset(); // Reset the form after submission
+                })
+                .catch((error) => {
+                    console.error("FAILED", error);
+                    statusMessage.textContent = "Error submitting order. Please try again.";
+                    statusMessage.style.color = "red";
+                });
+            });
+        });
+    </script>
+</body>
+</html>
